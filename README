@@ -15,7 +15,7 @@ Installation:
    Test the application is working properly, if working you will notice in the graphs/ & raw/ directories:
          As root run: ./cron.sh 
 
-   Verify the data is available via the web
+   Verify the data is available via the web, password can be found (and changed) in sarGraphs_1.1.0/password_file.php
          http://example.com/sarGraphs (This would be the path you created)
 
    Create a new crontab for root as below (runs hourly)
