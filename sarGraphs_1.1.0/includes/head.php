@@ -1,5 +1,5 @@
 <?php
-include "include/auth.php";
+include "auth.php";
 ?>
 <html>
 <head>
