@@ -1,0 +1,22 @@
+#########################################
+#    sarGraphs_1.1.0  11/06/2010        #
+#     For any questions contact         #
+#       jness@flip-edesign.com          #
+#########################################
+
+Installation: 
+  
+   Get the latest sarGraphs source from https://github.com/jness/sarGraph.
+
+   Clone or extract the sarGraphs source to a Web readable location (example would be /var/www/html/sarGraphs/).
+
+   Be sure this path allows override (to run .htaccess files).
+
+   Test the application is working properly, if working you will notice in the graphs/ & raw/ directories:
+         As root run: ./cron.sh 
+
+   Verify the data is available via the web
+         http://example.com/sarGraphs (This would be the path you created)
+
+   Create a new crontab for root as below (runs hourly)
+           10 * * * * /PATH TO DATA/graphs/cron.sh 2>&  (Add in the correct paths) 
