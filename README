@@ -6,7 +6,7 @@
 
 Installation: 
   
-   Get the latest sarGraphs source from https://github.com/jness/sarGraph.
+   Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
 
    Clone or extract the sarGraphs source to a Web readable location (example would be /var/www/html/sarGraphs/).
 
