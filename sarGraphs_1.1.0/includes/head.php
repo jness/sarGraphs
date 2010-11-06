@@ -1,3 +1,6 @@
+<?php
+include "include/auth.php";
+?>
 <html>
 <head>
 <title>sarGraphs Version 1.1.0</title>
