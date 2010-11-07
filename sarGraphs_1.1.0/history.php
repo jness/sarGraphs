@@ -32,29 +32,35 @@ include "includes/head.php";
     	<td><center>
 		<?php
 
-	if ($handle = opendir('./graphs')) {
-	    while (false !== ($file = readdir($handle))) {
-        	if ($file != "." && $file != "..") {
-			$chk = explode("-", $file);
-				if ($chk[0] == "$type" && $chk[1] != 'current.jpg') {
-				  $year = explode(".", $chk[3]);
-				echo "<font color='blue' face='Arial, Helvetica, sans-serif'><b>$chk[1]-$chk[2]-$year[0]</b></font><br>";
+		if ($handle = opendir('./graphs')) {
+		    while (false !== ($file = readdir($handle))) {
+		        if ($file != "." && $file != "..") {
+		        $file = explode("-", $file);
+		            if ($file[0] == "$type" && $file[1] != 'current.jpg') {
+				$year = explode(".", $file[3]);
+		                $files[]="$file[0]-$file[1]-$file[2]-$file[3]";
+		            }
+		        }
+		    }
+		}
+		closedir($handle);
+		array_multisort(&$files,SORT_DESC);
+
+		foreach ($files as $file) {
+		
+			$date=explode('.', $file);
+			$date=$date[0];
+			$timestamp=explode("-",$date);
+			$timestamp="$timestamp[1]-$timestamp[2]-$timestamp[3]";
+				echo "<font color='blue' face='Arial, Helvetica, sans-serif'><b>$timestamp</b></font><br>";
 		            	echo "<img src=graphs/$file><br>";
 				echo '<h2 class="trigger"><a href="#"><font size="1" color="blue" face="Arial, Helvetica, sans-serif">Show/Hide Raw</font></a></h2>';
 				echo '<div class="toggle_container">';
-				echo '<div class="block">';
 				echo '<h5>Raw</h5>';
-				echo "<pre>" . `cat ./raw/$type-$chk[1]-$chk[2]-$year[0].txt` . "</pre>";
-				echo '</div>';
-				echo '</div>';
-				}
-       		 }
-   	    }
-    closedir($handle);
-}
-		
-		?>
-
+				echo "<pre>" . `cat ./raw/$date.txt` . "</pre>";
+				echo '</div><br><br>';
+	      } 
+?>
 	</center></td>
   </tr>
 </table>
