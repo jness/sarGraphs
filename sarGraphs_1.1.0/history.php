@@ -56,9 +56,10 @@ include "includes/head.php";
 		            	echo "<img src=graphs/$file><br>";
 				echo '<h2 class="trigger"><a href="#"><font size="1" color="blue" face="Arial, Helvetica, sans-serif">Show/Hide Raw</font></a></h2>';
 				echo '<div class="toggle_container">';
+				echo '<div class="block">';
 				echo '<h5>Raw</h5>';
 				echo "<pre>" . `cat ./raw/$date.txt` . "</pre>";
-				echo '</div><br><br>';
+				echo '</div></div>';
 	      } 
 ?>
 	</center></td>
