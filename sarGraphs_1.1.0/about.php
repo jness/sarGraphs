@@ -5,7 +5,7 @@ include "includes/slim.php";
 <table width="950"  border="0" align="center" cellpadding="10">
   <tr>
     	<td><font color='#666666' face='Verdana, Arial, Helvetica, sans-serif'>
-	<b>Version:</b> 1.1.0
+	<b>Version:</b> 1.1
 	<br>
 	<b>Author:</b> <a href='https://github.com/jness'><font color='blue' size='2'><u>Jeffrey Ness</u></font></a>
 	<br>

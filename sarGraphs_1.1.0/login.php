@@ -21,7 +21,7 @@ header ("Location: login.php");
 ?>
 
 <head>
-<title>sarGraphs Version 1.1.0</title>
+<title>sarGraphs Version 1.1</title>
 <style type="text/css">
 body {
         margin-left: 0px;

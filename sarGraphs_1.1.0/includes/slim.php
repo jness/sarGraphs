@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>sarGraphs Version 1.1.0</title>
+<title>sarGraphs Version 1.1</title>
 <style type="text/css">
 <!--
 body {
