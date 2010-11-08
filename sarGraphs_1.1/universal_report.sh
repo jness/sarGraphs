@@ -81,60 +81,60 @@ if [ $input == 'cpu' ]
 then
   if [ $sar_timeformat == '12' ]
     then
-     $report | awk '{print $1 " " $2 " " $9 " " $7}' | egrep "^[0-9]" | grep -v idle > datadir/cpu
+     $report | egrep -v "RESTART" | awk '{print $1 " " $2 " " $9 " " $7}' | egrep "^[0-9]" | grep -v idle > datadir/cpu
   elif [ $sar_timeformat == '24' ]
     then
-     $report | awk '{print $1 " PLACEHOLDER " $8 " " $6}' | egrep "^[0-9]" | grep -v idle > datadir/cpu
+     $report | egrep -v "RESTART" | awk '{print $1 " PLACEHOLDER " $8 " " $6}' | egrep "^[0-9]" | grep -v idle > datadir/cpu
   fi
 
 elif [ $input == 'memory' ]
 then
   if [ $sar_timeformat == '12' ]
     then
-     $report | egrep ^[0-9] | grep -v kbm | awk '{printf $1 " %s %.2f \n", $2, ($4-$5)/1024}' > datadir/memory
+     $report | egrep -v "RESTART" | egrep ^[0-9] | grep -v kbm | awk '{printf $1 " %s %.2f \n", $2, ($4-$5)/1024}' > datadir/memory
   elif [ $sar_timeformat == '24' ]
     then
-     $report | egrep ^[0-9] | grep -v kbm | awk '{printf $1 " %s %.2f \n", "PLACEHOLDER", ($3-$4)/1024}' > datadir/memory
+     $report | egrep -v "RESTART" | egrep ^[0-9] | grep -v kbm | awk '{printf $1 " %s %.2f \n", "PLACEHOLDER", ($3-$4)/1024}' > datadir/memory
   fi
 
 elif [ $input == 'load' ]
 then
   if [ $sar_timeformat == '12' ]
     then
-     $report | awk '{print $1 " " $2 " " $5 " " $6 " " $7}' | egrep "^[0-9]" | grep -v ld > datadir/load
+     $report | egrep -v "RESTART" | awk '{print $1 " " $2 " " $5 " " $6 " " $7}' | egrep "^[0-9]" | grep -v ld > datadir/load
   elif [ $sar_timeformat == '24' ]
     then
-     $report | awk '{print $1 " PLACEHOLDER " $4 " " $5 " " $6}' | egrep "^[0-9]" | grep -v ld > datadir/load
+     $report | egrep -v "RESTART" | awk '{print $1 " PLACEHOLDER " $4 " " $5 " " $6}' | egrep "^[0-9]" | grep -v ld > datadir/load
   fi
 
 elif [ $input == 'network' ]
 then
   if [ $sar_timeformat == '12' ]
     then
-     $report | grep eth0 | awk '{ print $1 " " $2 " " $6 " " $7}' | egrep -v "Average" > datadir/network
+     $report | egrep -v "RESTART" | grep eth0 | awk '{ print $1 " " $2 " " $6 " " $7}' | egrep -v "Average" > datadir/network
   elif [ $sar_timeformat == '24' ]
     then
-     $report | grep eth0 | awk '{ print $1 " PLACEHOLDER " $5 " " $6}' | egrep -v "Average" > datadir/network
+     $report | egrep -v "RESTART" | grep eth0 | awk '{ print $1 " PLACEHOLDER " $5 " " $6}' | egrep -v "Average" > datadir/network
   fi
 
 elif [ $input == 'io' ]
 then
   if [ $sar_timeformat == '12' ]
     then
-     $report | awk '{print $1 " " $2 " " $9 " " $7}' | egrep "^[0-9]" | grep -v idle > datadir/io
+     $report | egrep -v "RESTART" | awk '{print $1 " " $2 " " $9 " " $7}' | egrep "^[0-9]" | grep -v idle > datadir/io
   elif [ $sar_timeformat == '24' ]
     then
-     $report | awk '{print $1 " PLACEHOLDER " $8 " " $6}' | egrep "^[0-9]" | grep -v idle > datadir/io
+     $report | egrep -v "RESTART" | awk '{print $1 " PLACEHOLDER " $8 " " $6}' | egrep "^[0-9]" | grep -v idle > datadir/io
   fi
 
 elif [ $input == 'swap' ]
 then
   if [ $sar_timeformat == '12' ]
     then
-     $report | awk '{ print $1 " " $2 " " $5 " " $10}' | egrep "^[0-9]" | egrep -v "idle|mem" > datadir/swap
+     $report | egrep -v "RESTART" | awk '{ print $1 " " $2 " " $5 " " $10}' | egrep "^[0-9]" | egrep -v "idle|mem" > datadir/swap
   elif [ $sar_timeformat == '24' ]
     then
-    $report | awk '{ print $1 " PLACEHOLDER " $4 " " $9}' | egrep "^[0-9]" | egrep -v "idle|mem" > datadir/swap
+    $report | egrep -v "RESTART" | awk '{ print $1 " PLACEHOLDER " $4 " " $9}' | egrep "^[0-9]" | egrep -v "idle|mem" > datadir/swap
   fi
 
 else
