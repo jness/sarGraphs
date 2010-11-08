@@ -20,7 +20,15 @@ $ydata = array();
 
 		// Get X Graph Data
 		$time=explode(":", $part[0]);
-		$time = mktime($time[0],$time[1],$time[2]);
+                // Check for AM/PM
+                if ($part[1] == 'AM' OR $part[1] == 'PM') {
+                        $clock='12';
+                        $time = date("H:i:s", STRTOTIME("$time[0]:$time[1]:$time[2] $part[1]"));
+                        $time = explode(":", $time);
+                        $time = mktime($time[0],$time[1],$time[2]);
+                }else{
+			$time = mktime($time[0],$time[1],$time[2]);
+		}
 			if (!trim($time) == '') {
 	 		$xdata[]=trim($time);
 			 }
