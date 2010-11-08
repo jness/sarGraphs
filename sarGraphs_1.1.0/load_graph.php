@@ -9,6 +9,9 @@ $ydata = array();
 	while (!feof($handle)) {
 		 $line=fgets($handle);
 
+                //Validate Variable
+                if ($line != NULL) {
+
 		// 1M Average
 		$part=explode(" ", $line);
 			if (!trim($part[2]) == '') {
@@ -34,6 +37,7 @@ $ydata = array();
 			if (!trim($time) == '') {
 	 		$xdata[]=trim($time);
 			 }
+		}
 	}
 
 //Close the connection
