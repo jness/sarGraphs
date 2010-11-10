@@ -6,23 +6,24 @@
 
 Installation: 
   
-  * Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
+ * Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
 
-  * In order for sarGraphs to function JpGraphs needs to be installed. This software can be downloaded 
-    from http://jpgraph.net/download/ (Version used for testing was jpgraph-3.5.0b1.tar.gz).
+ * In order for sarGraphs to function JpGraphs needs to be installed. This software can be downloaded 
+   from http://jpgraph.net/download/ (Version used for testing was jpgraph-3.5.0b1.tar.gz), or an RPM
+   can be found at http://flip-edesign.com/source/php-jpgraph/
 
-    Once the PHP Library has been extracted to the location of your choice, you will need to modify
-    sarGraphs/includes/jpgraph_dir.php and place in the path to your JpGraph src directory.
+   Once the PHP Library has been extracted to the location of your choice, you will need to modify
+   sarGraphs/includes/jpgraph_dir.php and place in the path to your JpGraph src directory.
 
-  * Clone or extract the sarGraphs source to a Web readable location (example would be /var/www/html/sarGraphs/).
+ * Clone or extract the sarGraphs source to a Web readable location (example would be /var/www/html/sarGraphs/).
 
-  * Be sure this path allows override (to run .htaccess files).
+ * Be sure this path allows override (to run .htaccess files).
 
-  * Test the application is working properly, if working you will notice in the graphs/ & raw/ directories:
+ * Test the application is working properly, if working you will notice in the graphs/ & raw/ directories:
          As root run: ./cron.sh 
 
-  * Verify the data is available via the web, password can be found (and changed) in sarGraphs_1.1.0/password_file.php
+ * Verify the data is available via the web, password can be found (and changed) in sarGraphs_1.1.0/password_file.php
          http://example.com/sarGraphs (This would be the path you created)
 
-  * Create a new crontab for root as below (runs hourly)
-           10 * * * * /PATH TO DATA/graphs/cron.sh 2>&  (Add in the correct paths) 
+ * Create a new crontab for root as below (runs hourly)
+         10 * * * * /PATH TO DATA/graphs/cron.sh 2>&  (Add in the correct paths) 
