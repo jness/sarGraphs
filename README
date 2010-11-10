@@ -4,7 +4,18 @@
 #       jness@flip-edesign.com          #
 #########################################
 
+Version Requirements:
+
+  sysstat-7.x
+  php-5.x
+  php-gd-5.x
+  jpgraph-3.5
+
 Installation: 
+
+ * Be sure you have sysstat installed and running. As this is intially a Redhat package version 7 of sysstat will
+   be required (this is the current version of sysstat on RHEL5). There may be plans for future release to support
+   addtional versions of sysstat.
   
  * Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
 
