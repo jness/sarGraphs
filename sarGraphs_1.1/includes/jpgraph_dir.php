@@ -1,3 +1,3 @@
 <?php
-$jpgraph_dir="";
+$jpgraph_dir="/usr/share/php/php-jpgraph/src";
 ?>
