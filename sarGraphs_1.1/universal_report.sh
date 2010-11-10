@@ -76,65 +76,161 @@ date=`echo $date | sed 's/\//-/g'`
 # the static text file of the SAR report.
 #
 
-
+# 
+# If CPU Report
+#
 if [ $input == 'cpu' ]
 then
+  cpu_head=$(sar | head -n3 | tail -n1)
+  count=1
+      while [ $count -le 10 ]
+      do
+         column=$(echo $cpu_head | awk '{print $"'"$count"'"}')
+           if [ "$column" == '%idle' ]
+           then
+               cpu_column=$count
+               break
+           fi
+          count=$(echo $count + 1 | bc)
+      done
   if [ $sar_timeformat == '12' ]
     then
-     $report | egrep -v "RESTART" | awk '{print $1 " " $2 " " $9 " " $7}' | egrep "^[0-9]" | grep -v idle > datadir/cpu
+     $report | egrep -v "RESTART" | awk '{print $1 " " $2 " " $"'"$cpu_column"'"}' | egrep "^[0-9]" | grep -v idle > datadir/cpu
   elif [ $sar_timeformat == '24' ]
     then
-     $report | egrep -v "RESTART" | awk '{print $1 " PLACEHOLDER " $8 " " $6}' | egrep "^[0-9]" | grep -v idle > datadir/cpu
+     $report | egrep -v "RESTART" | awk '{print $1 " PLACEHOLDER " $"'"$cpu_column"'"}' | egrep "^[0-9]" | grep -v idle > datadir/cpu
   fi
 
+#
+# If Memory Report
+#
 elif [ $input == 'memory' ]
 then
+  memory_head=$(sar -r| head -n3 | tail -n1)
+  count=1
+      while [ $count -le 11 ]
+      do
+         column=$(echo $memory_head | awk '{print $"'"$count"'"}')
+           if [ "$column" == 'kbmemused' ]
+           then
+               kbmemused=$count
+           elif [ "$column" == 'kbbuffers' ]
+           then
+               kbbuffers=$count
+           elif [ "$column" == 'kbcached' ]
+           then
+               kbcached=$count
+           fi
+          count=$(echo $count + 1 | bc)
+      done
   if [ $sar_timeformat == '12' ]
     then
-     $report | egrep -v "RESTART" | egrep ^[0-9] | grep -v kbm | awk '{printf $1 " %s %.2f \n", $2, ($4-$5)/1024}' > datadir/memory
+     $report | egrep -v "RESTART" | egrep ^[0-9] | grep -v kbm | awk '{printf $1 " %s %.2f \n", $2, ($"'"$kbmemused"'"-$"'"$kbbuffers"'"-$"'"$kbcached"'")/1024}' > datadir/memory
   elif [ $sar_timeformat == '24' ]
     then
-     $report | egrep -v "RESTART" | egrep ^[0-9] | grep -v kbm | awk '{printf $1 " %s %.2f \n", "PLACEHOLDER", ($3-$4)/1024}' > datadir/memory
+     $report | egrep -v "RESTART" | egrep ^[0-9] | grep -v kbm | awk '{printf $1 " %s %.2f \n", "PLACEHOLDER", ($"'"$kbmemused"'"-$"'"$kbbuffers"'"-$"'"$kbcached"'")/1024}' > datadir/memory
   fi
 
+#
+# If Load Report
+#
 elif [ $input == 'load' ]
 then
+  load_head=$(sar -q| head -n3 | tail -n1)
+  count=1
+      while [ $count -le 11 ]
+      do
+         column=$(echo $load_head | awk '{print $"'"$count"'"}')
+           if [ "$column" == 'ldavg-1' ]
+           then
+               load=$count
+	       break
+           fi
+          count=$(echo $count + 1 | bc)
+      done
   if [ $sar_timeformat == '12' ]
     then
-     $report | egrep -v "RESTART" | awk '{print $1 " " $2 " " $5 " " $6 " " $7}' | egrep "^[0-9]" | grep -v ld > datadir/load
+     $report | egrep -v "RESTART" | awk '{print $1 " " $2 " " $"'"$load"'"}' | egrep "^[0-9]" | grep -v ld > datadir/load
   elif [ $sar_timeformat == '24' ]
     then
-     $report | egrep -v "RESTART" | awk '{print $1 " PLACEHOLDER " $4 " " $5 " " $6}' | egrep "^[0-9]" | grep -v ld > datadir/load
+     $report | egrep -v "RESTART" | awk '{print $1 " PLACEHOLDER " $"'"$load"'"}' | egrep "^[0-9]" | grep -v ld > datadir/load
   fi
 
+#
+# If Network Report
+#
 elif [ $input == 'network' ]
 then
+  network_head=$(sar -n DEV| head -n3 | tail -n1)
+  count=1
+      while [ $count -le 11 ]
+      do
+         column=$(echo $network_head | awk '{print $"'"$count"'"}')
+           if [ "$column" == 'rxbyt/s' ]
+           then
+               rxbyt=$count
+	   elif [ "$column" == 'txbyt/s' ]
+	   then
+               txbyt=$count
+           fi
+          count=$(echo $count + 1 | bc)
+      done
   if [ $sar_timeformat == '12' ]
     then
-     $report | egrep -v "RESTART" | grep eth0 | awk '{ print $1 " " $2 " " $6 " " $7}' | egrep -v "Average" > datadir/network
+     $report | egrep -v "RESTART" | grep eth0 | awk '{ print $1 " " $2 " " $"'"$rxbyt"'" " " $"'"$txbyt"'"}' | egrep -v "Average" > datadir/network
   elif [ $sar_timeformat == '24' ]
     then
-     $report | egrep -v "RESTART" | grep eth0 | awk '{ print $1 " PLACEHOLDER " $5 " " $6}' | egrep -v "Average" > datadir/network
+     $report | egrep -v "RESTART" | grep eth0 | awk '{ print $1 " PLACEHOLDER " $"'"$rxbyt"'" " " $"'"$txbyt"'"}' | egrep -v "Average" > datadir/network
   fi
 
+#
+# If I/O Report
+#
 elif [ $input == 'io' ]
 then
+  io_head=$(sar| head -n3 | tail -n1)
+  count=1
+      while [ $count -le 11 ]
+      do
+         column=$(echo $io_head | awk '{print $"'"$count"'"}')
+           if [ "$column" == '%iowait' ]
+           then
+               iowait=$count
+	       break
+           fi
+          count=$(echo $count + 1 | bc)
+      done
   if [ $sar_timeformat == '12' ]
     then
-     $report | egrep -v "RESTART" | awk '{print $1 " " $2 " " $9 " " $7}' | egrep "^[0-9]" | grep -v idle > datadir/io
+     $report | egrep -v "RESTART" | awk '{print $1 " " $2 " " $"'"$iowait"'"}' | egrep "^[0-9]" | grep -v iowait > datadir/io
   elif [ $sar_timeformat == '24' ]
     then
-     $report | egrep -v "RESTART" | awk '{print $1 " PLACEHOLDER " $8 " " $6}' | egrep "^[0-9]" | grep -v idle > datadir/io
+     $report | egrep -v "RESTART" | awk '{print $1 " PLACEHOLDER " $"'"$iowait"'"}' | egrep "^[0-9]" | grep -v iowait > datadir/io
   fi
 
+#
+# If Swap Report
+#
 elif [ $input == 'swap' ]
 then
+  swap_head=$(sar -r| head -n3 | tail -n1)
+  count=1
+      while [ $count -le 11 ]
+      do
+         column=$(echo $swap_head | awk '{print $"'"$count"'"}')
+           if [ "$column" == '%swpused' ]
+           then
+               swap=$count
+               break
+           fi
+          count=$(echo $count + 1 | bc)
+      done
   if [ $sar_timeformat == '12' ]
     then
-     $report | egrep -v "RESTART" | awk '{ print $1 " " $2 " " $5 " " $10}' | egrep "^[0-9]" | egrep -v "idle|mem" > datadir/swap
+     $report | egrep -v "RESTART" | awk '{ print $1 " " $2 " " $"'"$swap"'"}' | egrep "^[0-9]" | egrep -v "%swpused" > datadir/swap
   elif [ $sar_timeformat == '24' ]
     then
-    $report | egrep -v "RESTART" | awk '{ print $1 " PLACEHOLDER " $4 " " $9}' | egrep "^[0-9]" | egrep -v "idle|mem" > datadir/swap
+    $report | egrep -v "RESTART" | awk '{ print $1 " PLACEHOLDER " $"'"$swap"'"}' | egrep "^[0-9]" | egrep -v "%swpused" > datadir/swap
   fi
 
 else

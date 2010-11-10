@@ -16,7 +16,7 @@ $ydata = array();
 		// Get Y Graph Data
 		$part=explode(" ", $line);
 			if (!trim($part[2]) == '') {
-			$ydata[]=trim($part[3]);
+			$ydata[]=trim($part[2]);
 		 	}
 
 		// Get X Graph Data
