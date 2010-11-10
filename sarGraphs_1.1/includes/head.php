@@ -37,7 +37,7 @@ h3.active {background-position: left bottom;} /*--When toggle is triggered, it w
 	margin: 0 0 5px;
 	padding: 0;
 	border-top: 1px solid #d6d6d6;
-	background: #f0f0f0 url(toggle_block_stretch.gif) repeat-y left top;
+	background: #f0f0f0;
 	overflow: hidden;
 	font-size: .90em;
 	width: 900px;
@@ -45,7 +45,6 @@ h3.active {background-position: left bottom;} /*--When toggle is triggered, it w
 }
 .toggle_container .block {
 	padding: 20px; /*--Padding of Container--*/
-	background: url(toggle_block_btm.gif) no-repeat left bottom; /*--Bottom rounded corners--*/
 }
 
 -->
