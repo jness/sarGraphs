@@ -1,0 +1,3 @@
+<?php
+$jpgraph_dir="";
+?>

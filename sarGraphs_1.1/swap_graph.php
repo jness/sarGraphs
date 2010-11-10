@@ -1,7 +1,8 @@
 <?php // content="text/plain; charset=utf-8"
-require_once ('jpgraph/src/jpgraph.php');
-require_once ('jpgraph/src/jpgraph_line.php');
-require_once( "jpgraph/src/jpgraph_date.php" );
+require_once ("includes/jpgraph_dir.php");
+require_once ("$jpgraph_dir/jpgraph.php");
+require_once ("$jpgraph_dir/jpgraph_line.php");
+require_once( "$jpgraph_dir/jpgraph_date.php" );
 
 // Pull in SAR data
 $handle = fopen("datadir/swap", "rb");
