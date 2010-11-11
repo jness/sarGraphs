@@ -13,13 +13,13 @@ Version Requirements:
 
 Installation: 
 
- * Be sure you have sysstat installed and running. As this is intially a Redhat package version 7 of sysstat will
-   be required (this is the current version of sysstat on RHEL5). There may be plans for future release to support
+ * Be sure you have sysstat installed and running. As this software was intially created for Redhat, sysstat package version 
+   5 - 7 (sysstat 8.1.5 modified how Swap is reported). There may be plans for future release to support
    addtional versions of sysstat.
   
  * Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
 
- * Clone or extract the sarGraphs source to a Web readable location (example would be /var/www/html/sarGraphs/).
+ * Clone or extract the sarGraphs source to a Web readable location.
 
  * Be sure this path allows override (to run .htaccess files).
 
