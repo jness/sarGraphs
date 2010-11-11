@@ -21,7 +21,9 @@ Installation:
 
  * In order for sarGraphs to function JpGraphs needs to be installed. This software can be downloaded 
    from http://jpgraph.net/download/ (Version used for testing was jpgraph-3.5.0b1.tar.gz), or an RPM
-   can be found at http://flip-edesign.com/sarGraphs/source/Redhat/
+   can be found at http://flip-edesign.com/sarGraphs/source/Redhat/. You will also want to review the
+   JpGraph QPL License http://www.opensource.org/licenses/qtpl.php as it uses a differnt license then
+   sarGraphs.
 
    Once the PHP Library has been extracted to the location of your choice, you will need to modify
    sarGraphs/includes/jpgraph_dir.php and place in the path to your JpGraph src directory.
