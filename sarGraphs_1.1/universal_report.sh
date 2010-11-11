@@ -250,16 +250,6 @@ else
 	$report > ./raw/$input-$date.txt
 	$report > ./raw/$input-current.txt
 fi
-#
-# Change the SAR output from AM/PM 12hour time to 24hour Time format
-#
-if [ $sar_timeformat == '12' ]
-then
-grep AM data | sed 's/^12:/00:/g' > tmp.data
-grep PM data | sed 's/^01:/13:/g' | sed 's/^02:/14:/g' |sed 's/^03:/15:/g' |sed 's/^04:/16:/g' |sed 's/^05:/17:/g' |sed 's/^06:/18:/g' |sed 's/^07:/19:/g' |sed 's/^08:/20:/g' |sed 's/^09:/21:/g' |sed 's/^10:/22:/g' |sed 's/^11:/23:/g'  >> tmp.data
-rm -rf data
-mv tmp.data data
-fi
 
 #
 # Use output to create graph
