@@ -1,0 +1,48 @@
+1.27 - Major release
+
+    * Introducing error handling.
+    * Can now draw charts with missing values.
+    * Automatic scaling improved.
+    * Can now put names on X and Y axis.
+    * Can now set number format on X and Y axis.
+    * Can now append units to X and Y values.
+    * You can display the serie values over the chart.
+    * Added stacked bar graph chart style.
+    * Possibility to merge external pictures.
+    * It's now possible to choose percentage or serie description for Pie charts labels.
+    * You can set the date format using PHP date() specifications.
+    * Modified the DataDescription array scheme.
+    * Possibility to draw gradient background.
+    * Fixed bug drawing charts with only one value.
+    * Fixed bug in background stripe for small sized graphs.
+    * Fixed bug in 3D pie percentage.
+    * Fixed various reported issues.
+
+1.27b - minor release
+
+    * Fixed issue with rounding percentages in pie charts.
+    * Added support for gradient backgrounds.
+    * Added support for text areas.
+    * It is now possible to use icon in plot charts.
+    * Added the possibility to draw a border around the graphs.
+    * It is now possible to generate image maps.
+    * We can now specify a label on tresholds.
+
+1.27c - minor release
+
+    * Added support for scatter axis.
+    * Added support for scatter line charts.
+    * Added support for scatter plot charts.
+    * Now possible to draw shadow under pie pieces.
+    * Now possible to add shadow under plots.
+
+1.27d - minor release
+
+    * Added shadow option for line / cubic charts.
+    * Fixed a bug for negative gradients.
+    * We can now manage two different Y scales.
+    * Legend box can now be transparent.
+    * Possibility to add a shadow under the graph title.
+    * Bar charts can now be contiguous.
+    * Reviewed the aliasing for all pie charts.
+

@@ -9,7 +9,7 @@ Version Requirements:
   sysstat-7.x
   php-5.x
   php-gd-5.x
-  jpgraph-3.5
+  pChart-1.27d
 
 Installation: 
 
@@ -18,15 +18,6 @@ Installation:
    addtional versions of sysstat.
   
  * Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
-
- * In order for sarGraphs to function JpGraphs needs to be installed. This software can be downloaded 
-   from http://jpgraph.net/download/ (Version used for testing was jpgraph-3.5.0b1.tar.gz), or an RPM
-   can be found at http://flip-edesign.com/sarGraphs/source/Redhat/. You will also want to review the
-   JpGraph QPL License http://www.opensource.org/licenses/qtpl.php as it uses a differnt license then
-   sarGraphs.
-
-   Once the PHP Library has been extracted to the location of your choice, you will need to modify
-   sarGraphs/includes/jpgraph_dir.php and place in the path to your JpGraph src directory.
 
  * Clone or extract the sarGraphs source to a Web readable location (example would be /var/www/html/sarGraphs/).
 

@@ -1,85 +1,86 @@
-<?php // content="text/plain; charset=utf-8"
-require_once ("includes/jpgraph_dir.php");
-require_once ("$jpgraph_dir/jpgraph.php");
-require_once ("$jpgraph_dir/jpgraph_line.php");
-require_once( "$jpgraph_dir/jpgraph_date.php" );
-
+<?php
 // Pull in SAR data
 $handle = fopen("datadir/network", "rb");
 $ydata = array();
-	while (!feof($handle)) {
-		 $line=fgets($handle);
+        while (!feof($handle)) {
+                 $line=fgets($handle);
 
                 //Validate Variable
                 if ($line != NULL) {
 
-		// Get Incoming Network Data
-		$part=explode(" ", $line);
-			if (!trim($part[2]) == '') {
-			$ydata[]=trim($part[2]);
-		 	}
+                // Get Recieved Network Data
+                $part=explode(" ", $line);
+                        if (!trim($part[2]) == '') {
+                        $ydata[]=trim($part[2] / 1024);
+                        }
 
                 // Get Sent Network Data
                 $part=explode(" ", $line);
                         if (!trim($part[2]) == '') {
-                        $ydata2[]=trim($part[3]);
+                        $ydata2[]=trim($part[3] / 1024);
                         }
 
+                // Get X Graph Data
+                $time=explode(":", $part[0]);
+                        if (!trim($time[0]) == '') {
+				if ( $count == $time[0] OR $next == $time[0] ) {
+	                        	$xdata[]='';
+					$count=$time[0];
+				}else{
+	                        	$xdata[]=trim($time[0]);
+					$count=$time[0];
+					$next=$time[0];
+					$next++;
+				}
+                        }
+                }
+        }
 
-		// Get X Graph Data
-		$time=explode(":", $part[0]);
-                // Check for AM/PM
-                if ($part[1] == 'AM' OR $part[1] == 'PM') {
-                        $clock='12';
-                        $time = date("H:i:s", STRTOTIME("$time[0]:$time[1]:$time[2] $part[1]"));
-                        $time = explode(":", $time);
-                        $time = mktime($time[0],$time[1],$time[2]);
-                }else{
-			$time = mktime($time[0],$time[1],$time[2]);
-		}
-			if (!trim($time) == '') {
-	 		$xdata[]=trim($time);
-			 }
-		}
-	}
+  // Standard inclusions
+  include("pChart/src/pData.class");
+  include("pChart/src/pChart.class");
+  
 
-//Close the connection
-fclose($handle);
+  // Dataset definition
+  $DataSet = new pData;
+  $DataSet->AddPoint($ydata,"Serie1");
+  $DataSet->AddPoint($ydata2,"Serie2");
+  $DataSet->AddPoint($xdata,"Serie3");
+  $DataSet->AddSerie("Serie1");
+  $DataSet->AddSerie("Serie2");
+  $DataSet->SetAbsciseLabelSerie("Serie3");
+  $DataSet->SetSerieName("Incoming kb","Serie1");
+  $DataSet->SetSerieName("Outgoing kb","Serie2");
+  #$DataSet->SetYAxisName("MB");
+  #$DataSet->SetYAxisUnit("%");
+  #$DataSet->SetXAxisFormat("date");
 
-// Size of the overall graph
-$width=900;
-$height=250;
- 
-// Create the graph and set a scale.
-// These two calls are always required
-$graph = new Graph($width,$height);
-$graph->SetScale('datlin');
-
-
-// Set X Graph Time format and Skip rate
-$graph->xaxis->SetTextLabelInterval(2);
-$graph->xaxis->scale->SetDateFormat('H');
-
-// Setup margin and titles
-$graph->SetMargin(40,20,20,40);
-$graph->title->Set('Network');
-$graph->subtitle->Set('(Network Usage in Bytes)');
-
-// Incoming Data
-$lineplot=new LinePlot($ydata,$xdata);
-$lineplot->SetFillColor('#61a9f3');
-
-// Sent Data
-$lineplot2=new LinePlot($ydata2,$xdata);
-
-// Legent
-$lineplot->SetLegend('Incoming Traffic');
-$lineplot2->SetLegend('Sent Traffic');
-
-// Add the plot to the graph
-$graph->Add($lineplot);
-$graph->Add($lineplot2);
- 
-// Display the graph
-$graph->Stroke();
+  // Initialise the graph   
+  $Test = new pChart(900,250);
+  $Test->setColorPalette(0,69,252,69);
+  #$Test->setColorPalette(1,126,185,245);
+  $Test->setFontProperties("Fonts/tahoma.ttf",8);
+  $Test->setGraphArea(50,35,890,215);
+  #$Test->drawFilledRoundedRectangle(7,7,450,223,5,240,240,240);
+  #$Test->drawRoundedRectangle(5,5,450,225,5,230,230,230);
+  $Test->drawGraphArea(255,255,255,FALSE);
+  $Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);
+  $Test->drawGrid(1,TRUE,240,240,240);
+  #$Test->drawGrid(4,TRUE);
+  
+  // Draw the 0 line   
+  $Test->setFontProperties("Fonts/tahoma.ttf",6);
+  $Test->drawTreshold(0,143,55,72,TRUE,TRUE);
+  
+  // Draw the line graph
+  $Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());
+  $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),1,0);
+  
+  // Finish the graph
+  $Test->setFontProperties("Fonts/tahoma.ttf",8);
+  $Test->drawLegend(800,45,$DataSet->GetDataDescription(),255,255,255);
+  $Test->setFontProperties("Fonts/tahoma.ttf",11);
+  $Test->drawTitle(325,25,"Network",150,150,150,585);
+  $Test->Stroke();
 ?>
+ 
