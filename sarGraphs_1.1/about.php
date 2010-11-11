@@ -13,7 +13,7 @@ include "includes/slim.php";
 	<br>
 	<b>Source:</b> <a href='https://github.com/jness/sarGraphs'><font color='blue' size='2'><u>Available at Github</u></font></a>
 	<br><br>
-	sarGraphs is a Open Source project written in PHP and Bash, <a href='http://jpgraph.net/'><u><font color='blue'>JpGraph</font></u></a> is the PHP library used to create graphs from the <a href='http://sebastien.godard.pagesperso-orange.fr/'><u><font color='blue'>sysstat</font></u></a> data.
+	sarGraphs is a Open Source project written in PHP and Bash, <a href='http://pchart.sourceforge.net'><u><font color='blue'>pChart</font></u></a> is the PHP library used to create graphs from the <a href='http://sebastien.godard.pagesperso-orange.fr/'><u><font color='blue'>sysstat</font></u></a> data.
 	</font> <br><br>
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
