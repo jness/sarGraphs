@@ -30,6 +30,9 @@ $ydata = array();
                 }
         }
 
+  //Close the connection
+  fclose($handle);
+
   // Standard inclusions
   include("pChart/src/pData.class");
   include("pChart/src/pChart.class");
