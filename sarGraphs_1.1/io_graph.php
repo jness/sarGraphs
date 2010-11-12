@@ -33,10 +33,12 @@ $ydata = array();
   //Close the connection
   fclose($handle);
 
+  // Include Global Config
+  include("includes/graph_conf.php";
+
   // Standard inclusions
-  include("pChart/src/pData.class");
-  include("pChart/src/pChart.class");
-  
+  include("$pChart_path/pData.class");
+  include("$pChart_path/pChart.class");
 
   // Dataset definition
   $DataSet = new pData;
@@ -52,7 +54,7 @@ $ydata = array();
   // Initialise the graph   
   $Test = new pChart(450,225);
   $Test->setColorPalette(0,255,44,44);
-  $Test->setFontProperties("Fonts/tahoma.ttf",8);
+  $Test->setFontProperties("$font",8);
   $Test->setGraphArea(50,35,440,190);
   #$Test->drawFilledRoundedRectangle(7,7,450,223,5,240,240,240);
   #$Test->drawRoundedRectangle(5,5,450,225,5,230,230,230);
@@ -62,7 +64,7 @@ $ydata = array();
   #$Test->drawGrid(4,TRUE);
   
   // Draw the 0 line   
-  $Test->setFontProperties("Fonts/tahoma.ttf",6);
+  $Test->setFontProperties("$font",6);
   $Test->drawTreshold(0,143,55,72,TRUE,TRUE);
   
   // Draw the line graph
@@ -70,9 +72,9 @@ $ydata = array();
   $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),1,0);
   
   // Finish the graph
-  $Test->setFontProperties("Fonts/tahoma.ttf",8);
+  $Test->setFontProperties("$font",8);
   #$Test->drawLegend(90,35,$DataSet->GetDataDescription(),255,255,255);
-  $Test->setFontProperties("Fonts/tahoma.ttf",11);
+  $Test->setFontProperties("$font",11);
   $Test->drawTitle(-140,25,"Disk I/O",150,150,150,585);
   $Test->Stroke();
 ?>
