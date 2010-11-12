@@ -40,7 +40,7 @@ $ydata = array();
   fclose($handle);
 
   // Include Global Config
-  include("includes/graph_conf.php";
+  include("includes/graph_conf.php");
 
   // Standard inclusions
   include("$pChart_path/pData.class");
