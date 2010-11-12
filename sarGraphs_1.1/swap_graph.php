@@ -2,6 +2,12 @@
 // Pull in SAR data
 $handle = fopen("datadir/swap", "rb");
 $ydata = array();
+
+//Define some Variables
+$seq=1;
+$count='0';
+$next='0';
+
         while (!feof($handle)) {
                  $line=fgets($handle);
 
@@ -17,14 +23,16 @@ $ydata = array();
                 // Get X Graph Data
                 $time=explode(":", $part[0]);
                         if (!trim($time[0]) == '') {
-				if ( $count == $time[0] OR $next == $time[0] ) {
+				if ( $seq == 1 OR $count == $time[0] OR $next == $time[0] ) {
 	                        	$xdata[]='';
 					$count=$time[0];
+					$seq++;
 				}else{
 	                        	$xdata[]=trim($time[0]);
 					$count=$time[0];
 					$next=$time[0];
 					$next++;
+					$seq++;
 				}
                         }
                 }
