@@ -83,7 +83,7 @@ $next='0';
   $Test->setFontProperties("$font",8);
   #$Test->drawLegend(90,35,$DataSet->GetDataDescription(),255,255,255);
   $Test->setFontProperties("$font",11);
-  $Test->drawTitle(-140,25,"Memory",150,150,150,585);
+  $Test->drawTitle(-110,25,"Memory",150,150,150,585);
   $Test->Stroke();
 ?>
  
