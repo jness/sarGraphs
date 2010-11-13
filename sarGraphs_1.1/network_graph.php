@@ -87,7 +87,7 @@ $next='0';
   
   // Draw the line graph
   $Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());
-  $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),1,0);
+  $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),.1,0);
   
   // Finish the graph
   $Test->setFontProperties("$font",8);
