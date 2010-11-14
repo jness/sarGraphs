@@ -6,10 +6,9 @@
 
 Version Requirements:
 
-  sysstat-7.x
+  sysstat > 5.x AND < 8.x
   php-5.x
   php-gd-5.x
-  pChart-1.27d
 
 Installation: 
 
