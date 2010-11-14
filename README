@@ -13,21 +13,30 @@ Version Requirements:
 
 Installation: 
 
- * Be sure you have sysstat installed and running. As this software was intially created for Redhat, sysstat package version 
-   5 - 7 (sysstat 8.1.5 modified how Swap is reported). There may be plans for future release to support
-   addtional versions of sysstat.
+ * Be sure you have sysstat installed and running. 
+
+   As this software was intially created for Redhat, sysstat package version 
+   5.x - 7.x will be required (sysstat 8.1.5 modified how Swap is reported). 
+   There may be plans for future release to support addtional versions of sysstat.
   
  * Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
 
- * Clone or extract the sarGraphs source to a Web readable location.
+ * Clone or extract the sarGraphs source to a Web readable location, or a install directory of your choice.
+
+   An example Apache configuration would look similar to below:
+
+   Alias /sarGraphs /usr/share/sarGraphs/
+   <Directory "/usr/share/sarGraphs/">	
+	AllowOverride All
+   </Directory>
 
  * Be sure this path allows override (to run .htaccess files).
 
- * Test the application is working properly, if working you will notice in the graphs/ & raw/ directories:
-         As root run: ./cron.sh 
+ * Test the application is working properly by running ./cron.sh as root. 
+   If working, you will notice in the graphs/ & raw/ directories are populated with data:
 
  * Verify the data is available via the web, password can be found (and changed) in sarGraphs_1.1.0/password_file.php
          http://example.com/sarGraphs (This would be the path you created)
 
  * Create a new crontab for root as below (runs hourly)
-         10 * * * * /PATH TO DATA/graphs/cron.sh 2>&  (Add in the correct paths) 
+         10 * * * * /usr/share/sarGraphs/cron.sh 2>&  (Add in the correct paths) 
