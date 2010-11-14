@@ -78,7 +78,7 @@ $(document).ready(function(){
 	<font size='2' color='white' face='Arial, Helvetica, sans-serif'> | </font>
 	<a href='http://www.gnu.org/licenses/gpl-2.0.txt'><font size='2' color='white' face='Verdana, Arial, Helvetica, sans-serif'><b>LICENSE</b></font></a>
 	<font size='2' color='white' face='Arial, Helvetica, sans-serif'> | </font>
-	<a href='http://flip-edesign.com/sarGraphs/about.php'><font size='2' color='white' face='Verdana, Arial, Helvetica, sans-serif'><b>ABOUT</b></font></a> 
+	<a href='http://flip-edesign.com/sarGraphs'><font size='2' color='white' face='Verdana, Arial, Helvetica, sans-serif'><b>ABOUT</b></font></a> 
     </td>
   </tr>
 </table>
