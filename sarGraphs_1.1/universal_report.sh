@@ -29,11 +29,34 @@ input2=""
 fi
 
 
+#
+# Get SAR Time format
+#
 if [ `sar | egrep 'AM|PM' | wc -l` -gt '0' ]
 then
 sar_timeformat=12
 else
 sar_timeformat=24
+fi
+
+#
+# Check if Swap usage is in Memory or Swap section
+#
+if [ "`sar -r | grep -o '%swpused'`" == '%swpused' ]
+then
+swap_command='sar -r'
+else
+swap_command='sar -S'
+fi
+
+#
+# Check if Network usage is KB or Bytes
+#
+if [ "`sar -n DEV | grep -o 'rxbyt/s'`" == 'rxbyt/s' ]
+then
+network_size='byte'
+else
+network_size='kb'
 fi
 
 if [ $input == 'cpu' ]
@@ -53,7 +76,7 @@ then
 report="sar $input2"
 elif [ $input == 'swap' ]
 then
-report="sar -r $input2"
+report="$swap_command $input2"
 elif [ $input == 'all' ]
 then
 $0 cpu
@@ -81,7 +104,7 @@ date=`echo $date | sed 's/\//-/g'`
 #
 if [ $input == 'cpu' ]
 then
-  cpu_head=$(sar | head -n3 | tail -n1)
+  cpu_head=$(sar | egrep '%' | head -n 1)
   count=1
       while [ $count -le 10 ]
       do
@@ -106,7 +129,7 @@ then
 #
 elif [ $input == 'memory' ]
 then
-  memory_head=$(sar -r| head -n3 | tail -n1)
+  memory_head=$(sar -r | egrep '%' | head -n 1)
   count=1
       while [ $count -le 11 ]
       do
@@ -136,7 +159,7 @@ then
 #
 elif [ $input == 'load' ]
 then
-  load_head=$(sar -q| head -n3 | tail -n1)
+  load_head=$(sar -q | egrep 'ldavg' | head -n1)
   count=1
       while [ $count -le 11 ]
       do
@@ -161,15 +184,15 @@ then
 #
 elif [ $input == 'network' ]
 then
-  network_head=$(sar -n DEV| head -n3 | tail -n1)
+  network_head=$(sar -n DEV | egrep 'rxpck' | head -n1)
   count=1
       while [ $count -le 11 ]
       do
          column=$(echo $network_head | awk '{print $"'"$count"'"}')
-           if [ "$column" == 'rxbyt/s' ]
+           if [ "$column" == 'rxbyt/s' -o "$column" == 'rxkB/s' ]
            then
                rxbyt=$count
-	   elif [ "$column" == 'txbyt/s' ]
+	   elif [ "$column" == 'txbyt/s' -o "$column" == 'txkB/s' ]
 	   then
                txbyt=$count
            fi
@@ -188,7 +211,7 @@ then
 #
 elif [ $input == 'io' ]
 then
-  io_head=$(sar| head -n3 | tail -n1)
+  io_head=$(sar | egrep '%' | head -n1)
   count=1
       while [ $count -le 11 ]
       do
@@ -213,7 +236,7 @@ then
 #
 elif [ $input == 'swap' ]
 then
-  swap_head=$(sar -r| head -n3 | tail -n1)
+  swap_head=$($swap_command | egrep '%' | head -n1)
   count=1
       while [ $count -le 11 ]
       do
@@ -254,6 +277,11 @@ fi
 #
 # Use output to create graph
 #
+if [ $input == 'network' ]
+then
+php ./$input''$network_size''_graph.php > ./graphs/$input-current.jpg
+else
 php ./$input''_graph.php > ./graphs/$input-current.jpg
+fi
 cp -a ./graphs/$input-current.jpg ./graphs/$input-$date.jpg
 echo "complete......"
