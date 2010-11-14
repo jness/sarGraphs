@@ -4,11 +4,13 @@
 #       jness@flip-edesign.com          #
 #########################################
 
-Version Requirements:
+OS Version Requirements:
+  Linux
 
-  sysstat > 5.x AND < 8.x
+Software Version Requirements:
+  sysstat
   php-5.x
-  php-gd-5.x
+  php GD with Freetype support
 
 Installation: 
 
