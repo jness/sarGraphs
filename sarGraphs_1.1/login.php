@@ -6,7 +6,7 @@ if (isset($_SESSION['admin'])) {
 header ("Location: index.php");
 }
 
-if ($_POST['password']) {
+if ($_POST) {
   include 'password_file.php';
   if ($_POST['password'] == $password) {
   $_SESSION['admin'] = 'true';
