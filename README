@@ -16,10 +16,6 @@ Installation:
 
  * Be sure you have sysstat installed and running. 
 
-   As this software was intially created for Redhat, sysstat package version 
-   5.x - 7.x will be required (sysstat 8.1.5 modified how Swap is reported). 
-   There may be plans for future release to support addtional versions of sysstat.
-  
  * Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
 
  * Clone or extract the sarGraphs source to a Web readable location, or a install directory of your choice.
