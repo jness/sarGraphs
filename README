@@ -36,4 +36,4 @@ Installation:
          http://example.com/sarGraphs (This would be the path you created)
 
  * Create a new crontab for root as below (runs hourly)
-         10 * * * * /usr/share/sarGraphs/cron.sh 2>&  (Add in the correct paths) 
+         10 * * * * /usr/share/sarGraphs/cron.sh 2>&1  (Add in the correct paths) 
