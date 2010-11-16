@@ -85,6 +85,7 @@ $0 load
 $0 memory
 $0 io
 $0 swap
+exit
 fi
 #
 # Get the date from the Current SAR Reports
