@@ -1,3 +1,0 @@
-php_flag allow_call_time_pass_reference 1
-RewriteEngine On
-RewriteRule ^(.*).sh index.php [F]

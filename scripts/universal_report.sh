@@ -268,11 +268,11 @@ fi
 #
 if [ $input == 'network' ]
 then
-	$report | egrep "eth0|IFACE" > ./raw/$input-$date.txt
-	$report | egrep "eth0|IFACE" > ./raw/$input-current.txt
+	$report | egrep "eth0|IFACE" > ../htdocs/raw/$input-$date.txt
+	$report | egrep "eth0|IFACE" > ../htdocs/raw/$input-current.txt
 else
-	$report > ./raw/$input-$date.txt
-	$report > ./raw/$input-current.txt
+	$report > ../htdocs/raw/$input-$date.txt
+	$report > ../htdocs/raw/$input-current.txt
 fi
 
 #
@@ -280,9 +280,9 @@ fi
 #
 if [ $input == 'network' ]
 then
-php ./$input''$network_size''_graph.php > ./graphs/$input-current.jpg
+php ./$input''$network_size''_graph.php > ../htdocs/graphs/$input-current.jpg
 else
-php ./$input''_graph.php > ./graphs/$input-current.jpg
+php ./$input''_graph.php > ../htdocs/graphs/$input-current.jpg
 fi
-cp -a ./graphs/$input-current.jpg ./graphs/$input-$date.jpg
+cp -a ../htdocs/graphs/$input-current.jpg ../htdocs/graphs/$input-$date.jpg
 echo "complete......"

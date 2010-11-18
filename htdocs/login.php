@@ -7,7 +7,7 @@ header ("Location: index.php");
 }
 
 if ($_POST) {
-  include 'password_file.php';
+  include '../conf/password_file.php';
   if ($_POST['password'] == $password) {
   $_SESSION['admin'] = 'true';
 header ("Location: index.php");
@@ -21,7 +21,7 @@ header ("Location: login.php");
 ?>
 
 <head>
-<title>sarGraphs Version 1.1</title>
+<title>sarGraphs: Light Weight Server Stats</title>
 <style type="text/css">
 body {
         margin-left: 0px;

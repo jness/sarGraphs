@@ -12,5 +12,5 @@ cd $abspath
 ./universal_report.sh all 
 
 # Clean up the old reports
-find $abspath/graphs/ -mtime +8 -exec rm -rf {} \;
-find $abspath/raw/ -mtime +8 -exec rm -rf {} \;
+find $abspath/graphs/ -type f -mtime +8 -exec rm -rf {} \;
+find $abspath/raw/ -type f -mtime +8 -exec rm -rf {} \;

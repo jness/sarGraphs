@@ -1,6 +1,6 @@
 <?php
 // Pull in SAR data
-$handle = fopen("datadir/swap", "rb");
+$handle = fopen("datadir/io", "rb");
 $ydata = array();
 
 //Define some Variables
@@ -42,7 +42,7 @@ $next='0';
   fclose($handle);
 
   // Include Global Config
-  include("includes/graph_conf.php");
+  include("../conf/graph_conf.php");
 
   // Standard inclusions
   include("$pChart_path/pData.class");
@@ -61,7 +61,7 @@ $next='0';
 
   // Initialise the graph   
   $Test = new pChart(450,225);
-  $Test->setColorPalette(0,201,127,246);
+  $Test->setColorPalette(0,255,44,44);
   $Test->setFontProperties("$font",8);
   $Test->setGraphArea(50,35,440,190);
   #$Test->drawFilledRoundedRectangle(7,7,450,223,5,240,240,240);
@@ -83,7 +83,7 @@ $next='0';
   $Test->setFontProperties("$font",8);
   #$Test->drawLegend(90,35,$DataSet->GetDataDescription(),255,255,255);
   $Test->setFontProperties("$font",11);
-  $Test->drawTitle(-110,25,"Swap",150,150,150,585);
+  $Test->drawTitle(-110,25,"Disk I/O",150,150,150,585);
   $Test->Stroke();
 ?>
  

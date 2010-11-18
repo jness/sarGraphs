@@ -1,5 +1,6 @@
 <?php
 include "includes/head.php";
+include "includes/banner.php";
 ?>
 
 <table width="950"  border="0" align="center" cellpadding="10">
@@ -9,21 +10,21 @@ include "includes/head.php";
 		<?php
 		// Check that datadir is populated
 		  if (
-			file_exists('./datadir/cpu') && 
-			file_exists('datadir/memory') && 
-			file_exists('./datadir/network') && 
-			file_exists('./datadir/swap') && 
-			file_exists('./datadir/io') &&
-			file_exists('./datadir/load')
+			file_exists('../scripts/datadir/cpu') && 
+			file_exists('../scripts/datadir/memory') && 
+			file_exists('../scripts/datadir/network') && 
+			file_exists('../scripts/datadir/swap') && 
+			file_exists('../scripts/datadir/io') &&
+			file_exists('../scripts/datadir/load')
 		     ) {
 			
 			if (
-			count(file('./datadir/cpu')) >= 2 &&
-                        count(file('./datadir/memory')) >= 2 &&
-                        count(file('./datadir/network')) >= 2 &&
-                        count(file('./datadir/swap')) >= 2 &&
-                        count(file('./datadir/io')) >= 2 &&
-                        count(file('./datadir/load')) >= 2 
+			count(file('../scripts/datadir/cpu')) >= 2 &&
+                        count(file('../scripts/datadir/memory')) >= 2 &&
+                        count(file('../scripts/datadir/network')) >= 2 &&
+                        count(file('../scripts/datadir/swap')) >= 2 &&
+                        count(file('../scripts/datadir/io')) >= 2 &&
+                        count(file('../scripts/datadir/load')) >= 2 
 			) {
 
 		?>

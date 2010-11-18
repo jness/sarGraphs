@@ -1,7 +1,6 @@
 #########################################
-#     sarGraphs_1.1  11/06/2010         #
-#     For any questions contact         #
-#       jness@flip-edesign.com          #
+#             sarGraphs                 #
+#   http://flip-edesign.com/sarGraphs   #
 #########################################
 
 OS Version Requirements:
@@ -9,8 +8,9 @@ OS Version Requirements:
 
 Software Version Requirements:
   sysstat
-  php-5.x
-  php GD with Freetype support
+  bc
+  php > 4.x 
+  php GD support with Freetype enabled
 
 Installation: 
 
@@ -22,9 +22,10 @@ Installation:
 
    An example Apache configuration would look similar to below:
 
-   Alias /sarGraphs /usr/share/sarGraphs/
-   <Directory "/usr/share/sarGraphs/">	
-	AllowOverride All
+   Alias /sarGraphs /usr/share/sarGraphs/htdocs
+   <Directory "/usr/share/sarGraphs/htdocs">	
+	php_flag allow_call_time_pass_reference 1
+	Allow from all
    </Directory>
 
  * Be sure this path allows override (to run .htaccess files).
@@ -32,8 +33,10 @@ Installation:
  * Test the application is working properly by running ./cron.sh as root. 
    If working, you will notice in the graphs/ & raw/ directories are populated with data:
 
- * Verify the data is available via the web, password can be found (and changed) in sarGraphs_1.1.0/password_file.php
-         http://example.com/sarGraphs (This would be the path you created)
+ * Verify the data is available via the web, password can be found (and changed) in sarGraphs_1.1.0/password_file.php:
 
- * Create a new crontab for root as below (runs hourly)
-         10 * * * * /usr/share/sarGraphs/cron.sh 2>&1  (Add in the correct paths) 
+         http://127.0.0.1/sarGraphs
+
+ * Create a new crontab for root as below, be sure to add correct paths:
+
+         10 * * * * /usr/share/sarGraphs/scripts/cron.sh 2>&1

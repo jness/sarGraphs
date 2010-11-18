@@ -1,6 +1,0 @@
-pChart - a PHP class to build charts
-pChart is a PHP class oriented framework designed to create aliased charts. Most of todays chart libraries have a cost, our project is intended to be free. Data can be retrieved from SQL queries, CSV files, or manually provided. This project is still under development and new features or fix are made every week.
-
-Focus has been put on rendering quality introducing an aliasing algorithm to draw eye candy graphics. Rendering speed has been dramatically enhanced since the first version, we'll still continue optimising the code!
-
-http://pchart.sourceforge.ne

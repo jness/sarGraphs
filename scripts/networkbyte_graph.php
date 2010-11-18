@@ -1,6 +1,6 @@
 <?php
 // Pull in SAR data
-$handle = fopen("datadir/load", "rb");
+$handle = fopen("datadir/network", "rb");
 $ydata = array();
 
 //Define some Variables
@@ -14,10 +14,16 @@ $next='0';
                 //Validate Variable
                 if ($line != NULL) {
 
-                // Get Y Graph Data
+                // Get Recieved Network Data
                 $part=explode(" ", $line);
                         if (!trim($part[2]) == '') {
-                        $ydata[]=trim($part[2]);
+                        $ydata[]=trim($part[2] / 1024);
+                        }
+
+                // Get Sent Network Data
+                $part=explode(" ", $line);
+                        if (!trim($part[2]) == '') {
+                        $ydata2[]=trim($part[3] / 1024);
                         }
 
                 // Get X Graph Data
@@ -42,7 +48,7 @@ $next='0';
   fclose($handle);
 
   // Include Global Config
-  include("includes/graph_conf.php");
+  include("../conf/graph_conf.php");
 
   // Standard inclusions
   include("$pChart_path/pData.class");
@@ -51,19 +57,23 @@ $next='0';
   // Dataset definition
   $DataSet = new pData;
   $DataSet->AddPoint($ydata,"Serie1");
+  $DataSet->AddPoint($ydata2,"Serie2");
   $DataSet->AddPoint($xdata,"Serie3");
   $DataSet->AddSerie("Serie1");
+  $DataSet->AddSerie("Serie2");
   $DataSet->SetAbsciseLabelSerie("Serie3");
-  $DataSet->SetSerieName("Incoming","Serie1");
+  $DataSet->SetSerieName("Incoming kb","Serie1");
+  $DataSet->SetSerieName("Outgoing kb","Serie2");
   #$DataSet->SetYAxisName("MB");
   #$DataSet->SetYAxisUnit("%");
   #$DataSet->SetXAxisFormat("date");
 
   // Initialise the graph   
-  $Test = new pChart(450,225);
-  $Test->setColorPalette(0,255,184,55);
+  $Test = new pChart(900,250);
+  $Test->setColorPalette(0,69,252,69);
+  #$Test->setColorPalette(1,126,185,245);
   $Test->setFontProperties("$font",8);
-  $Test->setGraphArea(50,35,440,190);
+  $Test->setGraphArea(50,35,890,215);
   #$Test->drawFilledRoundedRectangle(7,7,450,223,5,240,240,240);
   #$Test->drawRoundedRectangle(5,5,450,225,5,230,230,230);
   $Test->drawGraphArea(255,255,255,FALSE);
@@ -81,9 +91,9 @@ $next='0';
   
   // Finish the graph
   $Test->setFontProperties("$font",8);
-  #$Test->drawLegend(90,35,$DataSet->GetDataDescription(),255,255,255);
+  $Test->drawLegend(800,45,$DataSet->GetDataDescription(),255,255,255);
   $Test->setFontProperties("$font",11);
-  $Test->drawTitle(-110,25,"Load Average",150,150,150,585);
+  $Test->drawTitle(325,25,"Network",150,150,150,585);
   $Test->Stroke();
 ?>
  

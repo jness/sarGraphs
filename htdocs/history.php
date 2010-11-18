@@ -25,6 +25,7 @@ if ($_GET['type'] == 'cpu') {
 
 
 include "includes/head.php";
+include "includes/slim_banner.php";
 ?>
 
 <table width="950"  border="0" align="center" cellpadding="10">
