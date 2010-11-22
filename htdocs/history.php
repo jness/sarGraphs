@@ -53,14 +53,16 @@ include "includes/slim_banner.php";
 			$date=$date[0];
 			$timestamp=explode("-",$date);
 			$timestamp="$timestamp[1]-$timestamp[2]-$timestamp[3]";
-				echo "<font color='blue' face='Arial, Helvetica, sans-serif'><b>$timestamp</b></font><br>";
-		            	echo "<img src=graphs/$file><br>";
-				echo '<h2 class="trigger"><a href="#"><font size="1" color="blue" face="Arial, Helvetica, sans-serif">Show/Hide Raw</font></a></h2>';
-				echo '<div class="toggle_container">';
-				echo '<div class="block">';
-				echo '<h5>Raw</h5>';
-				echo "<pre>" . `cat ./raw/$date.txt` . "</pre>";
-				echo '</div></div>';
+
+                                echo "<h2 class='trigger'><a href='#'><font color='blue' size='2' face='Arial, Helvetica, sans-serif'><b>$timestamp</b></font> <font size='1' color='blue' face='Arial, Helvetica, sans-serif'>Show/Hide Raw</font></a></h2>";
+                                echo '<div class="toggle_container">';
+                                echo '<div class="block">';
+                                echo '<h5>Raw</h5>';
+                                echo "<pre>" . `cat ./raw/$date.txt` . "</pre>";
+                                echo '</div></div>';
+
+                                echo "<img src=graphs/$file><br><br>...<br>";
+
 	      } 
 ?>
 	</center></td>
