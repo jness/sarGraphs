@@ -4,6 +4,16 @@
 #set -x 
 
 #
+# Check for SAR Data
+#
+sarlines=`sar |egrep "^[0-9]" | wc -l`
+if [ $sarlines -le 2 ]
+then
+echo "Not enough SAR data, be sure the service is running"
+exit
+fi
+
+#
 # Check for input
 #
 if [ -n "$1" ]
