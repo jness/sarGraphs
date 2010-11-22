@@ -1,4 +1,8 @@
 <?php
+
+// Needed to make %
+$total_mem = exec("free -m | grep 'Mem:' | awk '{print $2}'");
+
 // Pull in SAR data
 $handle = fopen("datadir/memory", "rb");
 $ydata = array();
@@ -17,7 +21,11 @@ $next='0';
                 // Get Y Graph Data
                 $part=explode(" ", $line);
                         if (!trim($part[2]) == '') {
-                        $ydata[]=trim($part[2]);
+                        $num_amount=trim($part[2]);
+			$count1 = $num_amount / $total_mem;
+			$count2 = $count1 * 100;
+			$percent = number_format($count2, 0);
+			$ydata[]=trim($percent);
                         }
 
                 // Get X Graph Data
@@ -36,8 +44,8 @@ $next='0';
 				}
                         }
                 }
-        }
 
+        }
   //Close the connection
   fclose($handle);
 
@@ -56,7 +64,7 @@ $next='0';
   $DataSet->SetAbsciseLabelSerie("Serie3");
   $DataSet->SetSerieName("Incoming","Serie1");
   #$DataSet->SetYAxisName("MB");
-  #$DataSet->SetYAxisUnit("%");
+  $DataSet->SetYAxisUnit("%");
   #$DataSet->SetXAxisFormat("date");
 
   // Initialise the graph   
