@@ -27,8 +27,8 @@ if ($_GET['type'] == 'cpu') {
 include "includes/head.php";
 include "includes/slim_banner.php";
 ?>
-
-<table width="950"  border="0" align="center" cellpadding="10">
+<center><a href='help.php?type=<?php echo $type; ?>'><img alt='More information about this data' border='0' src='images/dialog-information.png'></a></center>
+<table width="950"  border="0" align="center" cellpadding="0">
   <tr>
     	<td><center>
 		<?php
@@ -57,7 +57,6 @@ include "includes/slim_banner.php";
                                 echo "<h2 class='trigger'><a href='#'><font color='blue' size='2' face='Arial, Helvetica, sans-serif'><b>$timestamp</b></font> <font size='1' color='blue' face='Arial, Helvetica, sans-serif'>Show/Hide Raw</font></a></h2>";
                                 echo '<div class="toggle_container">';
                                 echo '<div class="block">';
-                                echo '<h5>Raw</h5>';
                                 echo "<pre>" . `cat ./raw/$date.txt` . "</pre>";
                                 echo '</div></div>';
 

@@ -36,16 +36,24 @@ h3.active {background-position: left bottom;} /*--When toggle is triggered, it w
 .toggle_container {
 	margin: 0 0 5px;
 	padding: 0;
-	border-top: 1px solid #d6d6d6;
-	background: #f0f0f0;
 	overflow: hidden;
 	font-size: .90em;
 	width: 900px;
 	clear: both;
 }
 .toggle_container .block {
-	padding: 20px; /*--Padding of Container--*/
 }
+
+ pre {
+        border: 1pt solid #AEBDCC;
+        background-color: #F3F5F7;
+        padding: 8pt;
+        font-family: monospace;
+        font-size: 100%;
+        overflow:auto;
+  }
+
+
 
 -->
 </style>
