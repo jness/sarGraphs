@@ -364,5 +364,5 @@ header("Location: index.php");
 </td></tr>
 </table>
 <?php
-include('includes/footer');
+include('includes/footer.php');
 ?>
