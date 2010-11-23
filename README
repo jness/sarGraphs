@@ -1,42 +1,39 @@
-#########################################
-#             sarGraphs                 #
-#   http://flip-edesign.com/sarGraphs   #
-#########################################
+#+TITLE: sarGraphs
+#+TEXT: sarGraphs takes the output of sysstat and creates a 
+#+TEXT: graphical (pChart) PHP Web interface. 
+#+AUTHOR: Jeffrey Ness
+#+EMAIL: jness@flip-edesign.com
 
-OS Version Requirements:
-  Linux
+* Requirements:
+  - sysstat
+  - bc
+  - php > 4.x 
+  - php GD support with Freetype enabled
 
-Software Version Requirements:
-  sysstat
-  bc
-  php > 4.x 
-  php GD support with Freetype enabled
+* Installation:
 
-Installation: 
+  - Be sure you have sysstat installed and running. 
+  - Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
+  - Clone or extract the sarGraphs source to a Web readable location,
+    or a install directory of your choice.
 
- * Be sure you have sysstat installed and running. 
+:   Alias /sarGraphs /usr/share/sarGraphs/htdocs
+:   <Directory "/usr/share/sarGraphs/htdocs">	
+:      php_flag allow_call_time_pass_reference 1
+:      Allow from all
+:   </Directory>
 
- * Get the latest sarGraphs source from https://github.com/jness/sarGraphs.
+  - Be sure this path allows override (to run .htaccess files).
 
- * Clone or extract the sarGraphs source to a Web readable location, or a install directory of your choice.
+  - Test the application is working properly by running ./cron.sh as
+    root. If working, you will notice in the graphs/ & raw/
+    directories are populated with data:
 
-   An example Apache configuration would look similar to below:
+  - Verify the data is available via the web, password can be found
+    (and changed) in sarGraphs_1.1.0/password_file.php:
 
-   Alias /sarGraphs /usr/share/sarGraphs/htdocs
-   <Directory "/usr/share/sarGraphs/htdocs">	
-	php_flag allow_call_time_pass_reference 1
-	Allow from all
-   </Directory>
+: http://127.0.0.1/sarGraphs
 
- * Be sure this path allows override (to run .htaccess files).
+  - Create a new crontab for root as below, be sure to add correct paths:
 
- * Test the application is working properly by running ./cron.sh as root. 
-   If working, you will notice in the graphs/ & raw/ directories are populated with data:
-
- * Verify the data is available via the web, password can be found (and changed) in sarGraphs_1.1.0/password_file.php:
-
-         http://127.0.0.1/sarGraphs
-
- * Create a new crontab for root as below, be sure to add correct paths:
-
-         10 * * * * /usr/share/sarGraphs/scripts/cron.sh 2>&1
+: 10 * * * * /usr/share/sarGraphs/scripts/cron.sh 2>&1
