@@ -13,10 +13,12 @@
 * Installation:
 
   - Be sure you have sysstat installed and running. 
-  - Get the latest sarGraphs source from [[https://github.com/jness/sarGraphs][Github].
+  
   - Clone or extract the sarGraphs source to a Web readable location,
     or a install directory of your choice.
 
+  - Below is an example Apache configuration:
+  
 :   Alias /sarGraphs /usr/share/sarGraphs/htdocs
 :   <Directory "/usr/share/sarGraphs/htdocs">	
 :      php_flag allow_call_time_pass_reference 1
@@ -32,6 +34,6 @@
 
 : http://127.0.0.1/sarGraphs
 
-  - Create a new crontab for root as below, be sure to add correct paths:
+  - Create a new crontab for root similar to below (be sure to add correct paths):
 
 : 10 * * * * /usr/share/sarGraphs/scripts/cron.sh 2>&1
