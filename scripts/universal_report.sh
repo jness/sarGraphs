@@ -288,7 +288,12 @@ fi
 #
 # Use output to create graph
 #
-$php=`which php`
+$php=`type php | awk '{print $3}'`
+if [ ! -x $php ]
+then
+	echo "$php not a valid executable"
+fi
+
 if [ $input == 'network' ]
 then
 $php ./$input''$network_size''_graph.php > ../htdocs/graphs/$input-current.jpg
