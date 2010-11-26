@@ -288,11 +288,12 @@ fi
 #
 # Use output to create graph
 #
+$php=`which php`
 if [ $input == 'network' ]
 then
-php ./$input''$network_size''_graph.php > ../htdocs/graphs/$input-current.jpg
+$php ./$input''$network_size''_graph.php > ../htdocs/graphs/$input-current.jpg
 else
-php ./$input''_graph.php > ../htdocs/graphs/$input-current.jpg
+$php ./$input''_graph.php > ../htdocs/graphs/$input-current.jpg
 fi
 cp -a ../htdocs/graphs/$input-current.jpg ../htdocs/graphs/$input-$date.jpg
 echo "complete......"
