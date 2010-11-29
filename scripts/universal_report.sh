@@ -4,6 +4,19 @@
 #set -x 
 
 #
+# Address bug found by Oneiroi
+# https://github.com/jness/sarGraphs/issues#issue/1
+#
+if [ -x "`which php 2>/dev/null`" ]
+then 
+php=`which php`
+else
+echo "PHP Binary not found"
+exit
+fi
+
+
+#
 # Check for SAR Data
 #
 sarlines=`sar |egrep "^[0-9]" | wc -l`
@@ -290,9 +303,9 @@ fi
 #
 if [ $input == 'network' ]
 then
-php ./$input''$network_size''_graph.php > ../htdocs/graphs/$input-current.jpg
+$php ./$input''$network_size''_graph.php > ../htdocs/graphs/$input-current.jpg
 else
-php ./$input''_graph.php > ../htdocs/graphs/$input-current.jpg
+$php ./$input''_graph.php > ../htdocs/graphs/$input-current.jpg
 fi
 cp -a ../htdocs/graphs/$input-current.jpg ../htdocs/graphs/$input-$date.jpg
 echo "complete......"
