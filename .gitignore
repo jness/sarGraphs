@@ -1,4 +1,4 @@
-sarGraphs_1.1/graphs/*
-sarGraphs_1.1/raw/*
-sarGraphs_1.1/datadir/*
+htdocs/graphs/*
+htdocs/raw/*
+scripts/datadir/*
 !.gitignore
