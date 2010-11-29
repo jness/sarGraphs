@@ -24,7 +24,7 @@ $next='0';
                         $num_amount=trim($part[2]);
 			$count1 = $num_amount / $total_mem;
 			$count2 = $count1 * 100;
-			$percent = number_format($count2, 0);
+			$percent = number_format($count2, 1);
 			$ydata[]=trim($percent);
                         }
 
