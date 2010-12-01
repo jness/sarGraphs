@@ -288,7 +288,7 @@ fi
 #
 # Use output to create graph
 #
-$php=`type php | awk '{print $3}'`
+php=`type php | awk '{print $3}'`
 if [ ! -x $php ]
 then
 	echo "$php not a valid executable"
