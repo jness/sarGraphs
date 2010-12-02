@@ -291,8 +291,8 @@ fi
 #
 if [ $input == 'network' ]
 then
-	$report | egrep "eth0|IFACE" > ../htdocs/raw/$input-$date.txt
-	$report | egrep "eth0|IFACE" > ../htdocs/raw/$input-current.txt
+	$report | egrep "eth0|IFACE|^$|RESTART" > ../htdocs/raw/$input-$date.txt
+	$report | egrep "eth0|IFACE|^$|RESTART" > ../htdocs/raw/$input-current.txt
 else
 	$report > ../htdocs/raw/$input-$date.txt
 	$report > ../htdocs/raw/$input-current.txt
