@@ -1,25 +1,78 @@
 #!/bin/bash
 
-# Trouble Shoot
+# For Verbose Troubleshoot
 #set -x 
+
+#
+# Check for input
+#
+if [ ! -n "$1" ]
+then
+echo "Command Syntax:"
+echo "./universal_report.sh [report type] {sar file}"
+echo "[report type]: cpu, network, memory, load, io, swap"
+exit
+fi 
+
+#
+# Check for Valid input
+#
+if [ "$1" != 'cpu' -a "$1" != 'network' -a "$1" != 'memory' -a "$1" != 'load' -a "$1" != 'io' -a "$1" != 'swap' ] 
+then
+echo "Command Syntax:"
+echo "./universal_report.sh [report type] {sar file}"
+echo "[report type]: cpu, network, memory, load, io, swap"
+exit
+fi
+
+#
+# Set Variable
+#
+input=$1
+echo "=========== Starting $1 ==========="
+
+#
+# Check for SAR
+#
+echo "CHECKING SAR:"
+if [ -x "`which sar 2>/dev/null`" ]
+then
+echo "  OK"
+sar=`which sar`
+else
+echo "SAR Binary not found"
+exit
+fi
+
 
 #
 # Address bug found by Oneiroi
 # https://github.com/jness/sarGraphs/issues#issue/1
 #
+echo "CHECKING PHP:"
 if [ -x "`which php 2>/dev/null`" ]
 then 
+echo "  OK"
 php=`which php`
 else
 echo "PHP Binary not found"
 exit
 fi
 
+#
+# Get the date from the Current SAR Reports
+#
+date=`$sar | head -n 1 | awk '{print $4}' | awk -F/ '{print $1"/"$2"/"}'`
+year=`date +'%Y'`
+date=$date$year
+date=`echo $date | sed 's/\//-/g'`
+echo "VARIABLES:"
+echo "  \$date: $date"
 
 #
 # Check for SAR Data
 #
-sarlines=`sar |egrep "^[0-9]" | wc -l`
+sarlines=`$sar |egrep "^[0-9]" | wc -l`
 if [ $sarlines -le 2 ]
 then
 echo "Not enough SAR data, be sure the service is running"
@@ -27,96 +80,73 @@ exit
 fi
 
 #
-# Check for input
-#
-if [ -n "$1" ]
-then
-echo "thinking...."
-else
-echo "Command Syntax:"
-echo "./universal_report.sh [report type] {sar file}"
-echo "[report type]: cpu, network, memory, load, io, swap, all"
-exit
-fi
-
-#
-# Set Variables
-#
-input=$1
-
-if [ -n "$2" ]
-then
-input2="-f $2"
-else
-input2=""
-fi
-
-
-#
 # Get SAR Time format
 #
-if [ `sar | egrep 'AM|PM' | wc -l` -gt '0' ]
+if [ `$sar | egrep 'AM|PM' | wc -l` -gt '0' ]
 then
 sar_timeformat=12
 else
 sar_timeformat=24
 fi
+echo "  \$sar_timeformat: $sar_timeformat"
 
 #
 # Check if Swap usage is in Memory or Swap section
 #
-if [ "`sar -r | grep -o '%swpused'`" == '%swpused' ]
+if [ "`$sar -r | grep -o '%swpused'`" == '%swpused' ]
 then
-swap_command='sar -r'
+swap_command='$sar -r'
 else
-swap_command='sar -S'
+swap_command='$sar -S'
 fi
 
-#
-# Check if Network usage is KB or Bytes
-#
-if [ "`sar -n DEV | grep -o 'rxbyt/s'`" == 'rxbyt/s' ]
+
+
+if [ "$input" == 'cpu' ]
 then
-network_size='byte'
-else
-network_size='kb'
+report="$sar"
+elif [ "$input" == 'network' ]
+then
+	#
+	# Check if Network usage is KB or Bytes
+	#
+	if [ "`$sar -n DEV | grep -o 'rxbyt/s'`" == 'rxbyt/s' ]
+	then
+	network_size='byte'
+	else
+	network_size='kb'
+	fi
+echo "  \$network_size: $network_size"
+report="$sar -n DEV"
+elif [ "$input" == 'load' ]
+then
+report="$sar -q"
+elif [ "$input" == 'memory' ]
+then
+report="$sar -r"
+elif [ "$input" == 'io' ]
+then
+report="$sar"
+elif [ "$input" == 'swap' ]
+then
+	#
+	# Check if Swap usage is in Memory or Swap section
+	#
+	if [ "`sar -r | grep -o '%swpused'`" == '%swpused' ]
+	then
+	swap_command='sar -r'
+	else
+	swap_command='sar -S'
+	fi
+report="$swap_command"
 fi
 
-if [ $input == 'cpu' ]
-then
-report="sar $input2"
-elif [ $input == 'network' ]
-then
-report="sar -n DEV $input2"
-elif [ $input == 'load' ]
-then
-report="sar -q $input2"
-elif [ $input == 'memory' ]
-then
-report="sar -r $input2"
-elif [ $input == 'io' ]
-then
-report="sar $input2"
-elif [ $input == 'swap' ]
-then
-report="$swap_command $input2"
-elif [ $input == 'all' ]
-then
-$0 cpu
-$0 network
-$0 load
-$0 memory
-$0 io
-$0 swap
-exit
-fi
+# 
+# Print out SAR command
 #
-# Get the date from the Current SAR Reports
-#
-date=`sar $input2 | head -n 1 | awk '{print $4}' | awk -F/ '{print $1"/"$2"/"}'`
-year=`date +'%Y'`
-date=$date$year
-date=`echo $date | sed 's/\//-/g'`
+echo "SAR COMMAND:"
+echo "    $report"
+
 
 #
 # Create the edit SAR Output which will be graphed as well as the 
@@ -128,7 +158,7 @@ date=`echo $date | sed 's/\//-/g'`
 #
 if [ $input == 'cpu' ]
 then
-  cpu_head=$(sar | egrep '%' | head -n 1)
+  cpu_head=$($sar | egrep '%' | head -n 1)
   count=1
       while [ $count -le 10 ]
       do
@@ -153,7 +183,7 @@ then
 #
 elif [ $input == 'memory' ]
 then
-  memory_head=$(sar -r | egrep '%' | head -n 1)
+  memory_head=$($sar -r | egrep '%' | head -n 1)
   count=1
       while [ $count -le 11 ]
       do
@@ -183,7 +213,7 @@ then
 #
 elif [ $input == 'load' ]
 then
-  load_head=$(sar -q | egrep 'ldavg' | head -n1)
+  load_head=$($sar -q | egrep 'ldavg' | head -n1)
   count=1
       while [ $count -le 11 ]
       do
@@ -208,7 +238,7 @@ then
 #
 elif [ $input == 'network' ]
 then
-  network_head=$(sar -n DEV | egrep 'rxpck' | head -n1)
+  network_head=$($sar -n DEV | egrep 'rxpck' | head -n1)
   count=1
       while [ $count -le 11 ]
       do
@@ -235,7 +265,7 @@ then
 #
 elif [ $input == 'io' ]
 then
-  io_head=$(sar | egrep '%' | head -n1)
+  io_head=$($sar | egrep '%' | head -n1)
   count=1
       while [ $count -le 11 ]
       do
@@ -280,10 +310,6 @@ then
     $report | egrep -v "RESTART" | awk '{ print $1 " PLACEHOLDER " $"'"$swap"'"}' | egrep "^[0-9]" | egrep -v "%swpused" > datadir/swap
   fi
 
-else
-echo "Invalid Report Type!"
-echo "Valid Report Types: cpu, memory, load, network, io, swap, all"
-exit
 fi
 
 #
@@ -301,6 +327,7 @@ fi
 #
 # Use output to create graph
 #
+echo "STARTING GRAPH GENERATION:"
 if [ $input == 'network' ]
 then
 $php ./$input''$network_size''_graph.php > ../htdocs/graphs/$input-current.jpg
@@ -308,4 +335,5 @@ else
 $php ./$input''_graph.php > ../htdocs/graphs/$input-current.jpg
 fi
 cp -a ../htdocs/graphs/$input-current.jpg ../htdocs/graphs/$input-$date.jpg
-echo "complete......"
+echo "=========== Completed $1 ==========="
+echo " "
