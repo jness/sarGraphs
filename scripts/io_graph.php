@@ -67,7 +67,7 @@ $next='0';
   #$Test->drawFilledRoundedRectangle(7,7,450,223,5,240,240,240);
   #$Test->drawRoundedRectangle(5,5,450,225,5,230,230,230);
   $Test->drawGraphArea(255,255,255,FALSE);
-  $Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);
+  $Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,75,75,75,TRUE,0,2);
   $Test->drawGrid(1,TRUE,240,240,240);
   #$Test->drawGrid(4,TRUE);
   
@@ -83,7 +83,7 @@ $next='0';
   $Test->setFontProperties("$font",8);
   #$Test->drawLegend(90,35,$DataSet->GetDataDescription(),255,255,255);
   $Test->setFontProperties("$font",11);
-  $Test->drawTitle(-110,25,"Disk I/O",150,150,150,585);
+  $Test->drawTitle(-110,25,"Disk I/O",75,75,75,585);
   $Test->Stroke();
 ?>
  
