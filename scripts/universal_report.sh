@@ -29,7 +29,8 @@ fi
 # Set Variable
 #
 input=$1
-echo "=========== Starting $1 ==========="
+timestamp=$(date '+%D %H:%M:%S')
+echo "=========== Starting $1 $timestamp ==========="
 
 #
 # Check for SAR
