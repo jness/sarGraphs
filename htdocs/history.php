@@ -27,6 +27,8 @@ if ($_GET['type'] == 'cpu') {
 include "includes/head.php";
 include "includes/slim_banner.php";
 ?>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="includes/jquery.js"></script>
 <center><a href='help.php?type=<?php echo $type; ?>'><img alt='More information about this data' border='0' src='images/dialog-information.png'></a></center>
 <table width="950"  border="0" align="center" cellpadding="0">
   <tr>

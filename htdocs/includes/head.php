@@ -6,8 +6,6 @@ include "auth.php";
 <title>sarGraphs: Light Weight Server Stats </title>
 
 <link rel="stylesheet" type="text/css" href="includes/style.css" />
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="includes/jquery.js"></script>
 
 </head>
 
