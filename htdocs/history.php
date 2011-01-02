@@ -40,7 +40,7 @@ include "includes/slim_banner.php";
 		        if ($file != "." && $file != "..") {
 		        $file = explode("-", $file);
 		            if ($file[0] == "$type" && $file[1] != 'current.jpg') {
-				$year = explode(".", $file[3]);
+				$year = explode('.', $file[3]);
 		                $files[]="$file[0]-$file[1]-$file[2]-$file[3]";
 		            }
 		        }
@@ -50,16 +50,13 @@ include "includes/slim_banner.php";
 		array_multisort(&$files,SORT_DESC);
 
 		foreach ($files as $file) {
-		
 			$date=explode('.', $file);
-			$date=$date[0];
-			$timestamp=explode("-",$date);
+			$timestamp=explode("-",$date[0]);
 			$timestamp="$timestamp[1]-$timestamp[2]-$timestamp[3]";
-
                                 echo "<h2 class='trigger'><a href='#'><font color='blue' size='2' face='Arial, Helvetica, sans-serif'><b>$timestamp</b></font> <font size='1' color='blue' face='Arial, Helvetica, sans-serif'>Show/Hide Raw</font></a></h2>";
                                 echo '<div class="toggle_container">';
                                 echo '<div class="block">';
-                                echo "<pre>" . `cat ./raw/$date.txt` . "</pre>";
+                                echo "<pre>" . `cat ./raw/$date[0].txt` . "</pre>";
                                 echo '</div></div>';
 
                                 echo "<img src=graphs/$file><br><br>...<br>";
