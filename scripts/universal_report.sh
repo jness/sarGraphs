@@ -63,9 +63,9 @@ fi
 #
 # Get the date from the Current SAR Reports
 #
-date=`$sar | head -n 1 | awk '{print $4}' | awk -F/ '{print $1"/"$2"/"}'`
+date=`$sar | head -n 1 | awk '{print $4}' | awk -F/ '{print $1"/"$2}'`
 year=`date +'%Y'`
-date=$date$year
+date="$year-$date"
 date=`echo $date | sed 's/\//-/g'`
 echo "VARIABLES:"
 echo "  \$date: $date"
