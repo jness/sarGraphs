@@ -94,7 +94,7 @@ echo "  \$sar_timeformat: $sar_timeformat"
 #
 # Check if Swap usage is in Memory or Swap section
 #
-if [ "`$sar -r | grep -o '%swpused'`" == '%swpused' ]
+if [ "`$sar -r | grep -o '%swpused' | head -n 1`" == '%swpused' ]
 then
 swap_command='$sar -r'
 else
@@ -133,7 +133,7 @@ then
 	#
 	# Check if Swap usage is in Memory or Swap section
 	#
-	if [ "`sar -r | grep -o '%swpused'`" == '%swpused' ]
+	if [ "`sar -r | grep -o '%swpused' | head -n 1`" == '%swpused' ]
 	then
 	swap_command='sar -r'
 	else
