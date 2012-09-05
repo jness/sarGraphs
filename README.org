@@ -4,6 +4,8 @@
 #+AUTHOR: Jeffrey Ness
 #+EMAIL: jness@flip-edesign.com
 
+* sarGraphs is a dead project, please see pysarGraphs: https://github.com/jness/pysarGraphs
+
 * Requirements:
   - sysstat
   - bc
